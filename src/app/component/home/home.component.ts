@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RecetaService } from '../../services/receta.service';
+import { RecetaInterface } from '../../models/receta';
+import 'rxjs/observable'
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  recetas: RecetaInterface[]
+
+  constructor(
+    private recetaService: RecetaService,
+
+  ) { }
 
   ngOnInit() {
+    this.AllRecetas();
+  }
+
+  AllRecetas() {
+    this.recetaService.getAllReceta().subscribe(recetas => this.recetas = recetas);
+    
   }
 
 }

@@ -3,8 +3,10 @@ export interface RecetaInterface {
     titulo?:string;
     descripcion?:string;
     preparacion?:string;
+    ingredientes?:string;
     temporada?:string;
-    fechaPublicacion?:string;
+    fechaPublicacion?:any;
     userId?:string;
-    userNombre?:string
+    userNombre?:string;
+    
 }

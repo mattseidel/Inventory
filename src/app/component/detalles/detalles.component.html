@@ -2,20 +2,23 @@
   <div class="col-md-10 blog-main">
     <div class="blog-post mt-4">
       <h1 class="blog-post-tittle border-bottom">
-        Titulo
+        {{receta.titulo}}
       </h1>
-      <p class="blog-post-meta">fecha Por <a href="">Matthew Seidel</a></p>
-      <p>Descripción</p>
+      <p class="blog-post-meta">{{receta.fechaPublicacion | date:'dd-MMM'}} Por  <a href="">{{receta.userNombre}}</a></p>
+      <p>{{receta.descripcion}}</p>
       <blockquote>
-        <h2>Preparación</h2>
+        <h2>
+          Preparación
+        </h2>
+        <p> {{receta.preparacion}} </p>
       </blockquote>
       <h2>Ingredientes</h2>
-      <p>Ingredientes de la receta</p>
+      <p>{{receta.ingredientes}}</p>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2" *ngIf="idUsuarioLogado == receta.userId">
     <div class="btn-group pull-right mt-4">
-      <a routerLink="/edit/" class="btn btn-light" >Editar</a>
+      <a routerLink="/edit/{{receta.id}}" class="btn btn-light" >Editar</a>
       <a (click)=onDelete() class="btn btn-danger">Eliminar</a>
     </div>
   </div>

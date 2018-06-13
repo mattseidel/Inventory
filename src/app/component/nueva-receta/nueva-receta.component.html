@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <a class="btn btn-link">
+    <a class="btn btn-link" (click)="onBack()" >
       <i class="fa fa-arrow-circle-o-left">
         Atrás
       </i>
@@ -17,35 +17,79 @@
         Nueva receta
       </div>
       <div class="card-body">
-        <form>
+        <form #formGuardar="ngForm" (ngSubmit)="onSaveReceta(formGuardar)">
           <div class="form-group">
             <label>Titulo</label>
-            <input type="text" class="form-control" id="titulo" name="titulo">
+            <input type="text" class="form-control" id="titulo" [(ngModel)]="receta.titulo" name="titulo" required minlength="5" #titulo="ngModel">
+            <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="alert alert-danger">
+              <div *ngIf="titulo.errors.required">
+                <b>Error:</b> esto es requerido
+              </div>
+              <div *ngIf="titulo.errors.minlength">
+                <b>Error:</b> Debe tener almenos 5 caracteres
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Descripción</label>
-            <textarea type="text" class="form-control" id="descripcion" name="descripcion"></textarea>
+            <textarea type="text" class="form-control" id="descripcion" [(ngModel)]="receta.descripcion" name="descripcion" required
+              #descripcion="ngModel" maxlength="200" minlength="20"></textarea>
+            <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="alert alert-danger">
+              <div *ngIf="descripcion.errors.required">
+                <b>Error:</b> esto es requerido
+              </div>
+              <div *ngIf="descripcion.errors.minlength">
+                <b>Error:</b> Debe tener almenos 20 caracteres
+              </div>
+              <div *ngIf="descripcion.errors.maxlength">
+                  <b>Error:</b> Debe tener máximo 200 caracteres
+                </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Ingredientes</label>
-            <textarea type="text" class="form-control" id="ingredientes" name="ingredientes"></textarea>
+            <textarea type="text" class="form-control" id="ingredientes" 
+            [(ngModel)]="receta.ingredientes" required minlength="20" name="ingredientes" #ingredientes="ngModel"></textarea>
+            <div *ngIf="ingredientes.invalid && (ingredientes.dirty || ingredientes.touched)" class="alert alert-danger">
+              <div *ngIf="ingredientes.errors.required">
+                <b>Error:</b> esto es requerido
+              </div>
+              <div *ngIf="ingredientes.errors.minlength">
+                <b>Error:</b> Debe tener almenos 20 caracteres
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Preparacion</label>
-            <textarea type="text" class="form-control" id="titulo" name="titulo"></textarea>
+            <textarea type="text" class="form-control" id="preparacion" [(ngModel)]="receta.preparacion" name="preparacion" required
+              minlength="20" #preparacion="ngModel"></textarea>
           </div>
+          <div *ngIf="preparacion.invalid && (preparacion.dirty || preparacion.touched)" class="alert alert-danger">
+            <div *ngIf="preparacion.errors.required">
+              <b>Error:</b> esto es requerido
+            </div>
+            <div *ngIf="preparacion.errors.minlength">
+              <b>Error:</b> Debe tener almenos 20 caracteres
+            </div>
+          </div>
+
           <div class="form-group">
             <label>Temporada</label>
-            <select multiple="multiple" name="temporada" id="temporada" class="form-control">
-              <option value="">Verano</option>
-              <option value="">Otoño</option>
-              <option value="">Invierno</option>
-              <option value="">Primavera</option>
+            <select multiple="multiple" name="temporada" id="temporada" [(ngModel)]="receta.temporada" class="form-control" required
+              #temporada="ngModel">
+              <option>Verano</option>
+              <option>Otoño</option>
+              <option>Invierno</option>
+              <option>Primavera</option>
             </select>
+            <div *ngIf="temporada.invalid && (temporada.dirty || temporada.touched)" class="alert alert-danger">
+              <div *ngIf="temporada.errors.required">
+                <b>Error:</b> esto es requerido
+              </div>
+            </div>
           </div>
-          <input type="submit" value="Enviar" class="btn btn-primary btn-block">
+          <input type="submit" value="Enviar" class="btn btn-primary btn-block" [disabled]="!formGuardar.valid">
         </form>
       </div>
     </div>
   </div>
-</div>

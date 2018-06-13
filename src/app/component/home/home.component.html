@@ -1,27 +1,27 @@
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light mt-3">
   <div class="col-md-5 p-lg-5 mx-auto my-5">
-    <h1 class="display-4 font-weight-normal">Punny headline</h1>
-    <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing
-      pages.
+    <h1 class="display-4 font-weight-normal">Recetas increíbles</h1>
+    <p class="lead font-weight-normal">Aquí podrás ver el catalogo de increíbles recetas hechas por la comunidad y para la comunidad
     </p>
-    <a class="btn btn-outline-secondary" href="#">Coming soon</a>
   </div>
   <div class="product-device box-shadow d-none d-md-block"></div>
   <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
 </div>
-<div class="row">
-  <div class="col-md-6">
+
+
+<div class="row ml-1">
+  <div class="col-md-6" *ngFor='let receta of recetas'>
     <div class="card d-flex flex-column align-items-start">
       <div class="card-body d-flex flex-column align-items-start">
         <strong class="d-inline-blog mb-2 text-primary">
-          <span class="badge badge-pill badge-dark">Temporada</span>
+          <span class="badge badge-pill badge-info" *ngFor='let item of receta.temporada'> {{item}} </span>
         </strong>
-        <h3 class="mb-0">Titulo</h3>
+        <h3 class="mb-0"> <a href="/details/{{receta.id}}" class="text-info"> {{receta.titulo}} </a></h3>
         <div class="mb 1 text-muted">
-          <span class="badge badge-pill badge-sucess">FECHA</span>
+          <span class="badge badge-pill badge-danger"> {{receta.fechaPublicacion | date:'dd-MMM'}} </span>
         </div>
-        <p class="card-text mb-auto">DESCRIPCIÓN</p>
-        <a href="" class="btn btn-info">INFO</a>
+        <p class="card-text mb-auto cortar"> {{receta.descripcion}} </p>
+        <a href="/details/{{receta.id}}" class="btn btn-info">INFO</a>
       </div>
     </div>
   </div>

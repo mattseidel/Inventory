@@ -21,6 +21,7 @@ import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { RecetaService } from './services/receta.service';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -33,10 +34,11 @@ import { RecetaService } from './services/receta.service';
     NotFoundComponent,
     DetallesComponent,
     EditComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
